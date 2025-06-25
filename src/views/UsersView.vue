@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const users = ref([])
+const users = ref<any>([])
 
 onMounted(async () => {
   try {
