@@ -7,12 +7,18 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth0 } from '@auth0/auth0-vue'
 
-export default {
+const router = useRouter()
+const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
+
+const handleLogin = async () => {
+  loginWithRedirect()
+}
+</script>
   setup() {
     const router = useRouter()
     const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
