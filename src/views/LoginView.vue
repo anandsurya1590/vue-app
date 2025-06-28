@@ -18,24 +18,9 @@ const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
 const handleLogin = async () => {
   loginWithRedirect()
 }
-</script>
-  setup() {
-    const router = useRouter()
-    const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
 
-    const handleLogin = async () => {
-      loginWithRedirect()
-    }
-
-    return {
-      isAuthenticated,
-      handleLogin,
-      handleLogout: logout,
-      goToDashboard: () => {
-        router.push('/dashboard')
-      },
-    }
-  },
+const goToDashboard = () => {
+  router.push('/dashboard')
 }
 </script>
 

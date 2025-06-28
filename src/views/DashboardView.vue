@@ -13,7 +13,7 @@ const handleLogin = async () => {
   await loginWithRedirect()
 }
 const handleLogout = async () => {
-  await logout({ returnTo: window.location.origin })
+  await logout()
 }
 
 const close = () => {
@@ -42,7 +42,7 @@ onMounted(() => {
         </nav>
         <div class="user-menu">
           <img
-            :src="user.picture"
+            :src="user?.picture"
             alt="Logo"
             class="logo"
             v-on:click="showUserMenu = !showUserMenu"
@@ -50,12 +50,12 @@ onMounted(() => {
           <ul v-click-outside="close" v-if="isAuthenticated && showUserMenu">
             <li class="nav-item">
               <font-awesome-icon icon="user" class="mr-3" />
-              <router-link to="/profile">{{ user.name }}</router-link>
+              <router-link to="/profile">{{ user?.name }}</router-link>
             </li>
 
             <li>
               <font-awesome-icon icon="power-off" class="mr-3" />
-              <a id="qsLogoutBtn" href="#" class @click.prevent="logout">Log out</a>
+              <a href="#" @click.prevent="handleLogout">Logout</a>
             </li>
           </ul>
         </div>
