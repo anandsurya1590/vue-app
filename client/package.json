@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "client": "cd client && vite",
+    "client": "vite",
     "server": "cd api && node index.js",
     "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "cd client && vite preview",
-    "build-only": "cd client && vite build",
+    "preview": "vite preview",
+    "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "format": "prettier --write src/"
   },
