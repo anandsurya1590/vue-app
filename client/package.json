@@ -4,10 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "client": "cd client && vite",
+    "server": "cd api && node index.js",
     "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
-    "build-only": "vite build",
+    "preview": "cd client && vite preview",
+    "build-only": "cd client && vite build",
     "type-check": "vue-tsc --build",
     "format": "prettier --write src/"
   },
@@ -25,6 +27,7 @@
     "@types/node": "^22.14.0",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
+    "concurrently": "^9.2.0",
     "npm-run-all2": "^7.0.2",
     "prettier": "3.5.3",
     "sass": "^1.89.2",

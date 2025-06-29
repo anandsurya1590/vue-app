@@ -8,12 +8,54 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth0 } from '@auth0/auth0-vue'
+import { useMutation } from '@tanstack/vue-query'
+import { watch } from 'vue'
 
 const router = useRouter()
-const { loginWithRedirect, logout, isAuthenticated } = useAuth0()
+const { loginWithRedirect, getAccessTokenSilently, user, isAuthenticated } = useAuth0()
+
+const syncUser = async () => {
+  const token = await getAccessTokenSilently()
+  if (!token) {
+    throw new Error('Failed to retrieve access token')
+  }
+  const response = await fetch('http://localhost:3000/api/users/sync-user', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      auth0Id: user.value?.sub,
+      name: user.value?.name,
+      email: user.value?.email,
+      updated_at: user.value?.updated_at,
+      picture: user.value?.picture,
+    }),
+  })
+  if (!response.ok) {
+    throw new Error('Failed to sync user')
+  }
+  const data = await response.json()
+  return data
+}
+
+const { mutate } = useMutation({
+  mutationKey: ['syncUsers'],
+  mutationFn: syncUser,
+})
+
+watch(
+  isAuthenticated,
+  (newValue) => {
+    if (newValue) {
+      mutate()
+    }
+  },
+  { immediate: true },
+)
 
 const handleLogin = async () => {
   loginWithRedirect()

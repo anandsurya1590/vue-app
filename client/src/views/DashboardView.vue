@@ -9,9 +9,6 @@ const { user, isAuthenticated, loginWithRedirect, logout } = useAuth0()
 const isLoggedIn = ref(isAuthenticated.value)
 const showUserMenu = ref(false)
 
-const handleLogin = async () => {
-  await loginWithRedirect()
-}
 const handleLogout = async () => {
   await logout()
 }
@@ -23,8 +20,7 @@ const close = () => {
 }
 
 onMounted(() => {
-  console.log('User:', user.value)
-  console.log('Is Logged In:', isLoggedIn.value)
+  console.log('dashboard mounted')
 })
 </script>
 
@@ -34,11 +30,7 @@ onMounted(() => {
       <div class="wrapper">
         <nav>
           <RouterLink to="/dashboard" exact-active-class="active">Home</RouterLink>
-          <RouterLink to="/dashboard/about" exact-active-class="active">About</RouterLink>
           <RouterLink to="/dashboard/users" exact-active-class="active">Users</RouterLink>
-          <RouterLink to="/dashboard/tanstackusers" exact-active-class="active"
-            >Users Tanstack</RouterLink
-          >
         </nav>
         <div class="user-menu">
           <img
@@ -104,6 +96,10 @@ onMounted(() => {
 
       .user-menu {
         position: relative;
+        @include flex;
+        height: 100%;
+        width: 65px;
+
         img {
           width: 40px;
           height: 40px;
