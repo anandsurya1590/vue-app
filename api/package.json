@@ -1,12 +1,12 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "api/index.js",
+  "main": "index.js",
   "scripts": {
-   "generate": "npx prisma generate",
+    "generate": "npx prisma generate",
     "migrate": "npx prisma migrate dev --name init",
-    "start": "node api/index.js",
-    "build": "npx prisma generate && npx prisma migrate deploy && node api/index.js"
+    "start": "node index.js",
+    "build": "npx prisma generate && node index.js"
   },
   "keywords": [],
   "author": "",
