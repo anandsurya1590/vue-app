@@ -18,6 +18,9 @@ export default defineConfig(({ mode }) => {
       },
       port: 2000,
     },
+    build: {
+      outDir: 'dist',
+    },
     css: {
       preprocessorOptions: {
         scss: {
