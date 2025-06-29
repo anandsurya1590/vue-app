@@ -1,14 +1,13 @@
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
 import fs from 'node:fs'
 import path from 'node:path'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   return {
-    plugins: [vue(), vueDevTools()],
+    plugins: [vue()],
     server: {
       proxy: {
         '/api': 'http://localhost:3000',

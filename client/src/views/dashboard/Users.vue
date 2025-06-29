@@ -7,14 +7,12 @@ const { data, isLoading, error } = useQuery({
 })
 
 async function fetchUsers() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users')
+  const response = await fetch('http://localhost:3000/api/users')
   if (!response.ok) {
     throw new Error('Network response was not ok')
   }
   return response.json()
 }
-
-console.log(data, isLoading.value, error.value)
 </script>
 
 <template>
@@ -23,7 +21,7 @@ console.log(data, isLoading.value, error.value)
     <div v-if="isLoading">Loading...</div>
     <div v-if="error">{{ error.message }}</div>
     <ul>
-      <li v-for="user in data" :key="user.id">{{ user.name }} ({{ user.email }})</li>
+      <li v-for="user in data?.users" :key="user.id">{{ user.name }} ({{ user.email }})</li>
     </ul>
   </main>
 </template>

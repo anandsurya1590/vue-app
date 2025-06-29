@@ -30,3 +30,5 @@ coverage
 *.tsbuildinfo
 
 .vercel
+client/localhost-key.pem
+client/localhost.pem
